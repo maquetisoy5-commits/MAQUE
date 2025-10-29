@@ -141,3 +141,38 @@
 						  <a href =https://youtu.be/a9u2yZvsqHA?si=a52PQ4EmZcKGzIAT Target" = "blank"	>Youtube.com</a>
 						  <br>
 						 <a href =https://youtu.be/jQ1sfKIl50E?si=qufJV4bITFDyJb-E Target" = "blank"	>Youtube.com</a>
+
+<head>
+<meta charset="UTF-8">
+<title>Auto Scroll Rocket</title>
+<style>
+  body{height:2000px;background:linear-gradient(180deg,#aee1f9,#ffffff);margin:0}
+  #rocket{
+    position:fixed;bottom:20px;right:20px;
+    width:60px;height:60px;border-radius:50%;
+    background:red;color:white;font-size:30px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;box-shadow:0 0 10px rgba(0,0,0,0.3);
+  }
+</style>
+</head>
+<body>
+
+<div id="rocket">🚀</div>
+
+<script>
+let scrolling=true;
+function autoScroll(){
+  if(scrolling){
+    window.scrollBy(0,1);
+    if(window.innerHeight+window.scrollY>=document.body.offsetHeight)
+      window.scrollTo(0,0);
+  }
+  requestAnimationFrame(autoScroll);
+}
+document.getElementById('rocket').onclick=()=>scrolling=!scrolling;
+autoScroll();
+</script>
+
+</body>
+</html>
