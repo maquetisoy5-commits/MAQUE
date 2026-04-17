@@ -430,46 +430,96 @@ My goal is to become a professional software developer.
 © 2026 ROMEL B. MAQUE | Portfolio
 </footer>
 
-<!-- CHATBOT -->
+  <!-- REPLACE YOUR WHOLE CHATBOT HTML WITH THIS -->
+
 <div id="chat-widget">
-<div id="chat-header" onclick="toggleChat()">💬 Chat With Me</div>
 
-<div id="chat-body">
-<div id="chat-box"></div>
-<input type="text" id="user-input" placeholder="Ask me..." />
-<button onclick="sendMessage()">Send</button>
-</div>
+  <div id="chat-header" onclick="toggleChat()">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+    Chat with Romel
+  </div>
+
+  <div id="chat-body">
+
+    <div id="chat-box"></div>
+
+    <div class="chat-input-area">
+      <input type="text" id="user-input" placeholder="Type a message..." />
+      <button onclick="sendMessage()">➤</button>
+    </div>
+
+  </div>
 </div>
 
+
+<!-- REPLACE YOUR OLD SCRIPT WITH THIS -->
+  
 <script>
+  
 function toggleChat(){
 const body=document.getElementById("chat-body");
 body.style.display=body.style.display==="flex"?"none":"flex";
 }
 
+document.getElementById("user-input").addEventListener("keypress",function(e){
+if(e.key==="Enter"){
+sendMessage();
+}
+});
+
 function sendMessage(){
+
 const input=document.getElementById("user-input");
-const msg=input.value.toLowerCase().trim();
+const msg=input.value.trim();
 const box=document.getElementById("chat-box");
 
 if(!msg) return;
 
-box.innerHTML += "<p><b>You:</b> "+msg+"</p>";
+box.innerHTML += `
+<div class="msg user">${msg}</div>
+`;
+
+box.scrollTop=box.scrollHeight;
+
+input.value="";
 
 let reply="Please explore my portfolio.";
 
-if(msg.includes("name")) reply="I'm Romel B. Maque.";
-else if(msg.includes("skill")) reply="HTML, CSS, JavaScript, Java, PHP, C++.";
-else if(msg.includes("contact")) reply="Email me at maquetisoy5@gmail.com";
-else if(msg.includes("project")) reply="I built websites, portfolio designs, and chatbot projects.";
-else if(msg.includes("student")) reply="I'm currently a BSIT student.";
+const text=msg.toLowerCase();
+
+if(text.includes("name")) reply="I'm Romel B. Maque.";
+else if(text.includes("skills")) reply="HTML, CSS, JavaScript, Java, PHP, and C++.";
+else if(text.includes("contact")) reply="Email me at maquetisoy5@gmail.com";
+else if(text.includes("project")) reply="I made websites, chatbots, UI designs, and coding projects.";
+else if(text.includes("student")) reply="I'm currently a BSIT student.";
+else if(text.includes("hello")) reply="Hello! Welcome to my portfolio.";
+
+box.innerHTML += `
+<div class="msg bot" id="typing-msg">
+<img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+<div class="typing">
+<span></span><span></span><span></span>
+</div>
+</div>
+`;
+
+box.scrollTop=box.scrollHeight;
 
 setTimeout(()=>{
-box.innerHTML += "<p><b>Bot:</b> "+reply+"</p>";
-box.scrollTop=box.scrollHeight;
-},600);
 
-input.value="";
+document.getElementById("typing-msg").remove();
+
+box.innerHTML += `
+<div class="msg bot">
+<img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+${reply}
+</div>
+`;
+
+box.scrollTop=box.scrollHeight;
+
+},1200);
+
 }
 </script>
 
