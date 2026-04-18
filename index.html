@@ -95,9 +95,10 @@ section{
 }
 
 .hero img{
-  width:320px;
-  max-width:100%;
-  border-radius:50%;
+  width:260px;
+  height:260px;
+  object-fit:cover;
+  border-radius:20px;
   border:5px solid #38bdf8;
   box-shadow:0 0 25px rgba(56,189,248,.3);
 }
@@ -258,10 +259,20 @@ footer{
     justify-content:center;
   }
 }
+  #particles-js{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-1;
+background:#0f172a;
+  }
 </style>
 </head>
 
 <body>
+  <div id="particles-js"></div>
 
 <header>
 <div class="container navbar">
@@ -522,6 +533,29 @@ box.scrollTop=box.scrollHeight;
 
 }
 </script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 80 },
+    color: { value: "#38bdf8" },
+    shape: { type: "circle" },
+    opacity: { value: 0.5 },
+    size: { value: 3 },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#38bdf8",
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 2
+    }
+  }
+});
+</script>
 </body>
 </html>
