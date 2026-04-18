@@ -423,6 +423,13 @@ align-items:center;
 overflow:hidden;
 transition:1s;
 }
+  #loader.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Allows clicking the site behind it */
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
 
 /* Animated Background */
 .loader-bg{
@@ -929,33 +936,37 @@ localStorage.setItem("theme","dark");
 const loadText = "ROMEL PORTFOLIO";
 let i = 0;
 
-function typeLoader(){
-  if(i < loadText.length){
-    document.getElementById("loader-text").innerHTML += loadText.charAt(i);
-    i++;
-    setTimeout(typeLoader,100);
-  }
+function typeLoader() {
+    const target = document.getElementById("loader-text");
+    if (target && i < loadText.length) {
+        target.innerHTML += loadText.charAt(i);
+        i++;
+        setTimeout(typeLoader, 100);
+    }
 }
 typeLoader();
 
-/* AFTER PAGE LOAD */
-window.addEventListener("load", () => {
-
-  setTimeout(() => {
-
+function hideMyLoader() {
     const loader = document.getElementById("loader");
+    if (loader) {
+        loader.classList.add("hide");
+        // Completely remove after fade out to be safe
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 1000);
+    }
+}
 
-    loader.style.opacity = "0";
-    loader.style.visibility = "hidden";
-    loader.style.pointerEvents = "none";
-
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, 1000);
-
-  }, 4200); /* same as progress duration */
-
+// 1. Try to hide when page is fully loaded
+window.addEventListener("load", () => {
+    setTimeout(hideMyLoader, 4200); // Matches your animation timing
 });
+
+// 2. FAIL-SAFE: If the page is slow, force hide after 7 seconds
+setTimeout(() => {
+    hideMyLoader();
+}, 7000);
+
 </script>
 </body>
 </html>
