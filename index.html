@@ -418,8 +418,6 @@ background:#38bdf8;
     border: 0.5px solid #ccc;
   } 
 */
-  
-/* FULLSCREEN LOADER */
 #loader{
   position:fixed;
   top:0;
@@ -435,44 +433,61 @@ background:#38bdf8;
   overflow:hidden;
 }
 
-/* MOVING GRID BACKGROUND */
+/* GRID */
 .bg-lines{
   position:absolute;
   width:200%;
   height:200%;
   background:
-  linear-gradient(#00ffee22 1px, transparent 1px),
-  linear-gradient(90deg,#00ffee22 1px, transparent 1px);
-  background-size:50px 50px;
+  linear-gradient(#00ffee15 1px, transparent 1px),
+  linear-gradient(90deg,#00ffee15 1px, transparent 1px);
+  background-size:45px 45px;
   transform:rotate(45deg);
-  animation:gridMove 10s linear infinite;
+  animation:gridMove 6s linear infinite;
 }
 
 @keyframes gridMove{
   from{transform:rotate(45deg) translateY(0);}
-  to{transform:rotate(45deg) translateY(50px);}
+  to{transform:rotate(45deg) translateY(45px);}
 }
 
-/* LOGO */
 .logo{
   font-size:55px;
   color:#00ffee;
-  letter-spacing:8px;
   text-shadow:0 0 20px #00ffee;
+  letter-spacing:8px;
   z-index:2;
-  animation:flicker 1s infinite alternate;
 }
 
-@keyframes flicker{
-  from{opacity:.7;}
-  to{opacity:1;}
-}
-
-/* PERCENT */
 .percent{
-  font-size:40px;
+  font-size:42px;
   color:white;
   margin-top:20px;
+  z-index:2;
+}
+
+.bar-box{
+  width:280px;
+  height:8px;
+  background:#111;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:20px;
+  z-index:2;
+}
+
+.bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#00ffee,#00ff88);
+  box-shadow:0 0 20px #00ffee;
+}
+
+.loading-text{
+  color:#777;
+  margin-top:15px;
+  font-size:13px;
+  letter-spacing:3px;
   z-index:2;
 }
 
@@ -506,25 +521,7 @@ background:#38bdf8;
 </head>
 
 <body>
-
-  <!-- INSANE PORTFOLIO LOADER -->
-<div id="loader">
-
-  <div class="bg-lines"></div>
-
-  <h1 class="logo">WELCOME</h1>
-
-  <div class="percent">0%</div>
-
-  <div class="bar-box">
-    <div class="bar"></div>
-  </div>
-
-  <p class="loading-text">Initializing Portfolio...</p>
-
-</div>
-
-  
+ 
   <div id="particles-js"></div>
 
 <header>
@@ -728,6 +725,24 @@ My goal is to become a professional software developer.
   </div>
 </div>
 
+  <!-- FIXED INSANE LOADER -->
+<div id="loader">
+
+  <div class="bg-lines"></div>
+
+  <h1 class="logo">WELCOME</h1>
+
+  <div class="percent" id="percent">0%</div>
+
+  <div class="bar-box">
+    <div class="bar" id="bar"></div>
+  </div>
+
+  <p class="loading-text">Initializing Portfolio...</p>
+
+</div>
+
+
 
 <!-- REPLACE YOUR OLD SCRIPT WITH THIS -->
   
@@ -923,32 +938,37 @@ localStorage.setItem("theme","dark");
 
 };
 
-    let percent = document.querySelector(".percent");
-let bar = document.querySelector(".bar");
-let loader = document.getElementById("loader");
+    document.addEventListener("DOMContentLoaded", function(){
 
 let count = 0;
+let percent = document.getElementById("percent");
+let bar = document.getElementById("bar");
+let loader = document.getElementById("loader");
 
-let interval = setInterval(() => {
+let loading = setInterval(function(){
+
   count++;
   percent.innerHTML = count + "%";
   bar.style.width = count + "%";
 
   if(count >= 100){
-    clearInterval(interval);
 
-    setTimeout(() => {
-      loader.style.opacity = "0";
-      loader.style.transition = "1.5s";
+    clearInterval(loading);
 
-      setTimeout(() => {
-        loader.style.display = "none";
-      },1500);
+    loader.style.transition = "1.5s";
+    loader.style.opacity = "0";
 
-    },500);
+    setTimeout(function(){
+      loader.style.display = "none";
+      document.body.style.overflow = "auto";
+    },1500);
+
   }
 
 },30);
+
+});
+
     
   </script>
 </body>
