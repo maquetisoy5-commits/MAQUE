@@ -281,13 +281,7 @@ left:0;
 z-index:-1;
 background:#0f172a;
   }
-  container,
-header,
-section,
-footer{
-position:relative;
-z-index:9999;
-}
+  
   /*ADD THIS INSIDE <style>*/
 body{
 background:#020617;
@@ -407,113 +401,8 @@ cursor:pointer;
 font-size:18px;
 background:#38bdf8;
 }
-  /*ADD THIS INSIDE <style> */
-
-#loader{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#020617;
-z-index:999999;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-transition:1s;
-}
-  #loader.hide {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none; /* Allows clicking the site behind it */
-    transition: opacity 0.8s ease, visibility 0.8s;
-}
 
 
-/* Animated Background */
-.loader-bg{
-position:absolute;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at center,#0f172a,#020617);
-animation:pulsebg 4s infinite alternate;
-}
-
-@keyframes pulsebg{
-0%{transform:scale(1);}
-100%{transform:scale(1.1);}
-}
-
-/* Center Box */
-.loader-box{
-position:relative;
-text-align:center;
-color:white;
-z-index:2;
-width:90%;
-max-width:420px;
-}
-
-/* Profile */
-.loader-img{
-width:120px;
-height:120px;
-border-radius:25px;
-object-fit:cover;
-border:4px solid #38bdf8;
-box-shadow:
-0 0 20px #38bdf8,
-0 0 50px rgba(56,189,248,.6);
-animation:float 3s ease-in-out infinite;
-margin-bottom:25px;
-}
-
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
-}
-
-/* Title */
-#loader-text{
-font-size:32px;
-color:#38bdf8;
-margin-bottom:10px;
-text-shadow:0 0 15px rgba(56,189,248,.7);
-}
-
-/* Subtitle */
-.loader-box p{
-color:#cbd5e1;
-margin-bottom:20px;
-}
-
-/* Progress */
-.progress-bar{
-width:100%;
-height:12px;
-background:rgba(255,255,255,.08);
-border-radius:30px;
-overflow:hidden;
-}
-
-.progress-fill{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,#38bdf8,#06b6d4);
-animation:loadbar 4s linear forwards;
-box-shadow:0 0 15px #38bdf8;
-}
-
-@keyframes loadbar{
-100%{width:100%;}
-}
-
-/* Hide */
-#loader{
-transition:1s ease;
-}
 </style>
 </head>
 
@@ -929,44 +818,5 @@ localStorage.setItem("theme","dark");
 
 };
   </script>
-  <!-- PUT BEFORE </body> -->
-
-<script>
-/* TYPEWRITER */
-const loadText = "ROMEL PORTFOLIO";
-let i = 0;
-
-function typeLoader() {
-    const target = document.getElementById("loader-text");
-    if (target && i < loadText.length) {
-        target.innerHTML += loadText.charAt(i);
-        i++;
-        setTimeout(typeLoader, 100);
-    }
-}
-typeLoader();
-
-function hideMyLoader() {
-    const loader = document.getElementById("loader");
-    if (loader) {
-        loader.classList.add("hide");
-        // Completely remove after fade out to be safe
-        setTimeout(() => {
-            loader.style.display = "none";
-        }, 1000);
-    }
-}
-
-// 1. Try to hide when page is fully loaded
-window.addEventListener("load", () => {
-    setTimeout(hideMyLoader, 4200); // Matches your animation timing
-});
-
-// 2. FAIL-SAFE: If the page is slow, force hide after 7 seconds
-setTimeout(() => {
-    hideMyLoader();
-}, 7000);
-
-</script>
 </body>
 </html>
