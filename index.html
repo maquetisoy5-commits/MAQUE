@@ -356,6 +356,51 @@ animation:blink .7s infinite;
 @keyframes blink{
 50%{opacity:0;}
 }
+  body{
+transition:0.4s;
+}
+
+/* DARK MODE DEFAULT */
+body.dark{
+background:#0f172a;
+color:white;
+}
+
+/* LIGHT MODE */
+body.light{
+background:#f8fafc;
+color:#111827;
+}
+
+/* Cards */
+body.light .card{
+background:white;
+color:#111827;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+body.dark .card{
+background:#1e293b;
+}
+
+/* Header */
+body.light header{
+background:rgba(255,255,255,.8);
+}
+
+body.dark header{
+background:rgba(2,6,23,.8);
+}
+
+/* Theme Button */
+#theme-toggle{
+padding:10px 14px;
+border:none;
+border-radius:50%;
+cursor:pointer;
+font-size:18px;
+background:#38bdf8;
+}
 </style>
 </head>
 
@@ -374,6 +419,7 @@ animation:blink .7s infinite;
 <a href="#tutorials">Tutorials</a>
 <a href="#contact">Contact</a>
 </nav>
+  <button id="theme-toggle">🌙</button>
 </div>
 </header>
 
@@ -674,5 +720,31 @@ setTimeout(typeWriter,120);
 }
 typeWriter();
 </script>
+  <script>
+const btn = document.getElementById("theme-toggle");
+
+/* Default Theme */
+if(localStorage.getItem("theme") === "light"){
+document.body.classList.add("light");
+btn.innerHTML="☀️";
+}else{
+document.body.classList.add("dark");
+btn.innerHTML="🌙";
+}
+
+btn.onclick = () => {
+
+if(document.body.classList.contains("dark")){
+document.body.classList.replace("dark","light");
+btn.innerHTML="☀️";
+localStorage.setItem("theme","light");
+}else{
+document.body.classList.replace("light","dark");
+btn.innerHTML="🌙";
+localStorage.setItem("theme","dark");
+}
+
+};
+  </script>
 </body>
 </html>
