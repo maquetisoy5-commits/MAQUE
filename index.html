@@ -418,10 +418,112 @@ background:#38bdf8;
     border: 0.5px solid #ccc;
   } 
 */
+  
+/* FULLSCREEN LOADER */
+#loader{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:99999;
+  overflow:hidden;
+}
+
+/* MOVING GRID BACKGROUND */
+.bg-lines{
+  position:absolute;
+  width:200%;
+  height:200%;
+  background:
+  linear-gradient(#00ffee22 1px, transparent 1px),
+  linear-gradient(90deg,#00ffee22 1px, transparent 1px);
+  background-size:50px 50px;
+  transform:rotate(45deg);
+  animation:gridMove 10s linear infinite;
+}
+
+@keyframes gridMove{
+  from{transform:rotate(45deg) translateY(0);}
+  to{transform:rotate(45deg) translateY(50px);}
+}
+
+/* LOGO */
+.logo{
+  font-size:55px;
+  color:#00ffee;
+  letter-spacing:8px;
+  text-shadow:0 0 20px #00ffee;
+  z-index:2;
+  animation:flicker 1s infinite alternate;
+}
+
+@keyframes flicker{
+  from{opacity:.7;}
+  to{opacity:1;}
+}
+
+/* PERCENT */
+.percent{
+  font-size:40px;
+  color:white;
+  margin-top:20px;
+  z-index:2;
+}
+
+/* BAR */
+.bar-box{
+  width:300px;
+  height:10px;
+  background:#111;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:20px;
+  z-index:2;
+}
+
+.bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#00ffee,#00ff88);
+  box-shadow:0 0 20px #00ffee;
+}
+
+/* TEXT */
+.loading-text{
+  color:#aaa;
+  margin-top:15px;
+  letter-spacing:3px;
+  z-index:2;
+}
+  
 </style>
 </head>
 
 <body>
+
+  <!-- INSANE PORTFOLIO LOADER -->
+<div id="loader">
+
+  <div class="bg-lines"></div>
+
+  <h1 class="logo">WELCOME</h1>
+
+  <div class="percent">0%</div>
+
+  <div class="bar-box">
+    <div class="bar"></div>
+  </div>
+
+  <p class="loading-text">Initializing Portfolio...</p>
+
+</div>
+
   
   <div id="particles-js"></div>
 
@@ -820,6 +922,34 @@ localStorage.setItem("theme","dark");
 }
 
 };
+
+    let percent = document.querySelector(".percent");
+let bar = document.querySelector(".bar");
+let loader = document.getElementById("loader");
+
+let count = 0;
+
+let interval = setInterval(() => {
+  count++;
+  percent.innerHTML = count + "%";
+  bar.style.width = count + "%";
+
+  if(count >= 100){
+    clearInterval(interval);
+
+    setTimeout(() => {
+      loader.style.opacity = "0";
+      loader.style.transition = "1.5s";
+
+      setTimeout(() => {
+        loader.style.display = "none";
+      },1500);
+
+    },500);
+  }
+
+},30);
+    
   </script>
 </body>
 </html>
