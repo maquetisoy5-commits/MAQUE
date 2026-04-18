@@ -402,6 +402,15 @@ font-size:18px;
 background:#38bdf8;
 }
 
+  .navbar {
+    position: relative;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 60px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    border: 0.5px solid #ccc;
+  }
 
 </style>
 </head>
@@ -414,13 +423,22 @@ background:#38bdf8;
 <div class="container navbar">
 <div class="logo">ROMEL B. MAQUE</div>
 
-<nav>
-<a href="#home">Home</a>
+<nav class="navbar">
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Certificates</a></li>
+<li><a href="#tutorials">Tutorials</a></li>
+<li><a href="#contact">Contact</a></li>
+  <div class="indicator"></div>
+</ul>  
+<!--<a href="#home">Home</a>
 <a href="#about">About</a>
 <a href="#skills">Skills</a>
 <a href="#projects">Certificates</a>
 <a href="#tutorials">Tutorials</a>
-<a href="#contact">Contact</a>
+<a href="#contact">Contact</a> -->
 </nav>
   <button id="theme-toggle">🌙</button>
 </div>
