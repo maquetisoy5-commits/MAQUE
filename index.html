@@ -210,59 +210,6 @@ footer{
   color:#94a3b8;
 }
 
-/* CHATBOT */
-#chat-widget{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:300px;
-  z-index:9999;
-}
-
-#chat-header{
-  background:#38bdf8;
-  color:black;
-  padding:12px;
-  border-radius:14px 14px 0 0;
-  cursor:pointer;
-  text-align:center;
-  font-weight:700;
-}
-
-#chat-body{
-  display:none;
-  flex-direction:column;
-  background:#1e293b;
-  padding:10px;
-  border-radius:0 0 14px 14px;
-}
-
-#chat-box{
-  height:220px;
-  overflow-y:auto;
-  background:#0f172a;
-  padding:10px;
-  border-radius:10px;
-  margin-bottom:10px;
-  font-size:14px;
-}
-
-#user-input{
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  margin-bottom:8px;
-}
-
-#chat-body button{
-  padding:10px;
-  border:none;
-  background:#38bdf8;
-  border-radius:8px;
-  font-weight:600;
-  cursor:pointer;
-}
-
 /* MOBILE */
 @media(max-width:768px){
   .hero{
@@ -705,27 +652,6 @@ My goal is to become a professional software developer.
 © 2026 ROMEL B. MAQUE | Portfolio
 </footer>
 
-  <!-- REPLACE YOUR WHOLE CHATBOT HTML WITH THIS -->
-
-<div id="chat-widget">
-
-  <div id="chat-header" onclick="toggleChat()">
-    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
-    Chat with Romel
-  </div>
-
-  <div id="chat-body">
-
-    <div id="chat-box"></div>
-
-    <div class="chat-input-area">
-      <input type="text" id="user-input" placeholder="Type a message..." />
-      <button onclick="sendMessage()">➤</button>
-    </div>
-
-  </div>
-</div>
-
   <!-- FIXED INSANE LOADER -->
 <div id="loader">
 
@@ -742,79 +668,7 @@ My goal is to become a professional software developer.
   <p class="loading-text">Initializing Portfolio...</p>
 
 </div>
-
-
-
-<!-- REPLACE YOUR OLD SCRIPT WITH THIS -->
-  
 <script>
-  
-function toggleChat(){
-const body=document.getElementById("chat-body");
-body.style.display=body.style.display==="flex"?"none":"flex";
-}
-
-document.getElementById("user-input").addEventListener("keypress",function(e){
-if(e.key==="Enter"){
-sendMessage();
-}
-});
-
-function sendMessage(){
-
-const input=document.getElementById("user-input");
-const msg=input.value.trim();
-const box=document.getElementById("chat-box");
-
-if(!msg) return;
-
-box.innerHTML += `
-<div class="msg user">${msg}</div>
-`;
-
-box.scrollTop=box.scrollHeight;
-
-input.value="";
-
-let reply="Please explore my portfolio.";
-
-const text=msg.toLowerCase();
-
-if(text.includes("name")) reply="I'm Romel B. Maque.";
-else if(text.includes("skills")) reply="HTML, CSS, JavaScript, Java, PHP, and C++.";
-else if(text.includes("contact")) reply="Email me at maquetisoy5@gmail.com";
-else if(text.includes("project")) reply="I made websites, chatbots, UI designs, and coding projects.";
-else if(text.includes("student")) reply="I'm currently a BSIT student.";
-else if(text.includes("hello")) reply="Hello! Welcome to my portfolio.";
-
-box.innerHTML += `
-<div class="msg bot" id="typing-msg">
-<img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
-<div class="typing">
-<span></span><span></span><span></span>
-</div>
-</div>
-`;
-
-box.scrollTop=box.scrollHeight;
-
-setTimeout(()=>{
-
-document.getElementById("typing-msg").remove();
-
-box.innerHTML += `
-<div class="msg bot">
-<img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
-${reply}
-</div>
-`;
-
-box.scrollTop=box.scrollHeight;
-
-},1200);
-
-}
-
   const btn = document.getElementById("theme-toggle");  
 </script>
 
