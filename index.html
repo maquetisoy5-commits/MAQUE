@@ -463,7 +463,75 @@ background:#38bdf8;
   letter-spacing:3px;
   z-index:2;
 }
-  
+
+  #chat-widget{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:320px;
+  z-index:9999;
+  font-size:14px;
+}
+
+#chat-header{
+  background:#38bdf8;
+  color:black;
+  padding:12px;
+  border-radius:12px 12px 0 0;
+  cursor:pointer;
+  text-align:center;
+  font-weight:600;
+}
+
+#chat-body{
+  display:none;
+  flex-direction:column;
+  background:#1e293b;
+  padding:10px;
+  border-radius:0 0 12px 12px;
+}
+
+#chat-box{
+  height:230px;
+  overflow-y:auto;
+  background:#0f172a;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+.msg{
+  margin-bottom:8px;
+  padding:8px 10px;
+  border-radius:8px;
+}
+
+.user{
+  background:#38bdf8;
+  color:black;
+  text-align:right;
+}
+
+.bot{
+  background:#334155;
+}
+
+#user-input{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  margin-bottom:8px;
+}
+
+.chat-input-area button{
+  width:100%;
+  padding:10px;
+  border:none;
+  background:#38bdf8;
+  border-radius:8px;
+  cursor:pointer;
+}
 </style>
 </head>
 
@@ -801,9 +869,87 @@ let loading = setInterval(function(){
 
 },30);
 
-});
-
-    
+});    
   </script>
+  <div id="chat-widget">
+  <div id="chat-header" onclick="toggleChat()">💬 Ask Me</div>
+
+  <div id="chat-body">
+    <div id="chat-box"></div>
+
+    <div class="chat-input-area">
+      <input type="text" id="user-input" placeholder="Ask about me..." />
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</div>
+
+  <script>
+function toggleChat(){
+  const body=document.getElementById("chat-body");
+  body.style.display = body.style.display === "flex" ? "none" : "flex";
+}
+
+function sendMessage(){
+  const input=document.getElementById("user-input");
+  const box=document.getElementById("chat-box");
+  const msg=input.value.trim();
+
+  if(!msg) return;
+
+  // show user message
+  box.innerHTML += `<div class="msg user">${msg}</div>`;
+  input.value="";
+  box.scrollTop=box.scrollHeight;
+
+  const reply = getReply(msg.toLowerCase());
+
+  setTimeout(()=>{
+    box.innerHTML += `<div class="msg bot">${reply}</div>`;
+    box.scrollTop=box.scrollHeight;
+  },600);
+}
+
+function getReply(text){
+
+  // ABOUT
+  if(text.includes("who are you") || text.includes("about")){
+    return "I'm Romel B. Maque, an aspiring developer and BSIT student passionate about web development and design.";
+  }
+
+  // SKILLS
+  if(text.includes("skills") || text.includes("what can you do")){
+    return "My skills include HTML, CSS, JavaScript, Java, PHP, C++, UI/UX design, and GitHub.";
+  }
+
+  // PROJECTS
+  if(text.includes("project") || text.includes("work")){
+    return "I have created websites, UI designs, coding projects, and interactive portfolios.";
+  }
+
+  // CERTIFICATES
+  if(text.includes("certificate") || text.includes("certification")){
+    return "I have certifications including Cisco networking and tech seminar participation.";
+  }
+
+  // CONTACT
+  if(text.includes("contact") || text.includes("email")){
+    return "You can contact me at: maquetisoy5@gmail.com or visit my GitHub.";
+  }
+
+  // STUDENT
+  if(text.includes("student") || text.includes("study")){
+    return "I am currently a BSIT student working towards becoming a professional developer.";
+  }
+
+  // GREETING
+  if(text.includes("hello") || text.includes("hi")){
+    return "Hello! 👋 Feel free to ask anything about me or my work.";
+  }
+
+  // DEFAULT
+  return "I’m not sure about that. Try asking about my skills, projects, certificates, or contact info.";
+}
+</script>
 </body>
 </html>
